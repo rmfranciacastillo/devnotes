@@ -1,0 +1,33 @@
+STRATEGY: Web Apps
+===================
+
+After making a bunch of apps I always find new ways to contruct an app but always
+
+forget why I do it in the order I build them. This is a simple reminder of what
+
+strategies I use when building apps/websites. 
+
+
+Prerequisites:
+---------------
+Node
+Client framework (I hate templates)
+Database
+Docker
+
+
+Recipe
+--------
+
+- Setup Dockerfile and docker-compose.yml
+  
+  - Node
+  - MongoDB  
+ 
+- Setup simple node server 
+- Make simple API with backend
+- Connect to Database
+- Setup models and controllers
+- Setup strategies for Login
+- Connect to Client src 
+

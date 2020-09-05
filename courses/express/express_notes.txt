@@ -1,0 +1,10 @@
+NOTES: ExpressJS 
+================
+
+Generator: 
+----------
+Used for simple express server generation. Cool reminder of simple server
+
+structure. 
+
+
