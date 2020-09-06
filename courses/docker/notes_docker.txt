@@ -1,0 +1,63 @@
+Notes: Docker
+==============
+
+Shell command for downloading docker:
+
+wget https://get.docker.com/
+
+Commands:
+---------
+version     Shows version(duh)
+info        Shows configuration values from the engine
+
+container:
+***********
+Docker container <command>
+
+logs    Shows the logs of container
+top     Shows all the processes running on the container
+inspect Details of how the container started 
+stats   Performance stats on all containers 
+ls -a   Shows all containers
+rm      Removes one or more containers
+
+run -it   Start new container interactively
+exec -it  Run additional command in existing container
+
+
+example: 
+  
+  docker container run --publish 80:80 --detach nginx  // Runs docker for nginx
+  docker container run -p 80:80 -d nginx      // Detach nginx
+
+  // Some containers(mysql) accept --env(-e) variables (MYSQL_RANDOM_ROOT=yes)
+  // ex: docker container run -d -p 3306:3306 --name db -e MYSQL_RANDOM_ROOT=yes mysql 
+ 
+  docker container run -it --name proxy nginx bash  // Runs container with interactive bash
+  docker container start -ai ubuntu     // Rerun container with interactive bash
+  docker container exec -it mysql bash  // Runs bash on mysql container
+
+  // Inspect network setup
+  // The use of '{{ stuff.. }}' if bc Docker uses Go templates
+  docker container inspect --format '{{ .NetworkSettings.IPAddress }}' webhost
+
+Networks:
+----------
+
+Commands:
+*********
+ls          Shows all Networks
+inspect     Inspect Network Configurations
+create      Uses --driver to create new virtual network
+connect     Attach network to container  
+disconnect  Detach network to container
+
+
+// A container CAN be part of two separate networks
+
+example:
+
+  docker network create my_app_net    // Creates a network
+
+  // Create and attach container to Network 
+  docker container run -d --name webhost --network my_app_net nginx  

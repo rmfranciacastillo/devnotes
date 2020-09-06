@@ -21,8 +21,11 @@ Recipe
 
 - Setup Dockerfile and docker-compose.yml
   
+  // Need to find an architecture that would make Dockerfile reload when changed
+  // It's really annoying having to purge all images of restart the local network
+  // when dealing with this....
   - Node
-  - MongoDB  
+  - MongoDB 
  
 - Setup simple node server 
 - Make simple API with backend
