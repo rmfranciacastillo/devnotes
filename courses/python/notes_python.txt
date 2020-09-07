@@ -1,4 +1,62 @@
 NOTES: python3
 ================
 
+Loops:
+------
 
+for
+***
+
+ex: 
+
+vowels = ['a', 'e', 'i', 'o', 'u']
+word = "Milliways"
+
+for letter in word: 
+  if letter in vowels: 
+    print(letter)
+
+Data structures:
+----------------
+
+list
+*****
+An ordered mutable collection of objects
+
+
+# The following are methods that can be used at runtime 
+
+methods:
+  append(item)      Used to append an item to a list
+  remove(value)     Removes item with the requested VALUE# Fucking confusing
+  pop(index)        Removes the last item in the list
+  extend(values)    Adds values to a List # Will be added to the end
+  insert(0,1)       Inserts values at an index 
+  
+
+
+ex: 
+  a = [1,2,3,4]
+  len(a)  # Length of the list
+
+tuple
+******
+An ordered inmutable collection of objects
+
+ex:
+  (a,b,c,d)
+ 
+dictionary
+***********
+An unordered set of key/value pairs
+  
+ex: 
+  {'eggs': 2, 'sausage': 1, 'bacon': 1, 'spam': 500}
+
+
+set
+****
+An unordered set of unique objects
+
+ex:
+  set('abc')

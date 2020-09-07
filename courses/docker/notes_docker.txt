@@ -54,6 +54,8 @@ disconnect  Detach network to container
 
 
 // A container CAN be part of two separate networks
+// Docker has it's own DNS network making it easy for containers to find each 
+// other.
 
 example:
 
