@@ -62,4 +62,57 @@ example:
   docker network create my_app_net    // Creates a network
 
   // Create and attach container to Network 
-  docker container run -d --name webhost --network my_app_net nginx  
+  docker container run -d --name webhost --network my_app_net nginx 
+
+
+Image:
+-------
+
+`docker image <command>`
+
+Commands:
+**********
+history       Shows layers of changes made in an image
+inspect       returns JSON metadata about the image
+
+tag <container> <tag>     renames existing container with custom tag 
+
+
+Dockerfile:
+----------- 
+
+Uses file to create images with a series of instructions.
+
+ex:
+  FROM ubuntu:lastest
+  COPY . . 
+  RUN npm install
+  CMD ["npm", "start"]
+
+// To ignore certain files use .dockerignore. Makes it faster to install  
+
+commands: 
+*********
+
+example:
+
+  docker image build -t <image_name> .        // Creates an image from the Dockerfile
+  docker container run --rm -p 3000:3000 testnode     // Run the container temporarily
+  docker tag testnode rmfranciacastillo/testing-node  // Tag the image for 
+  docker push rmfranciacastillo/testing-node          // Push image to Docker
+
+
+Volume:
+-------
+
+Commands:
+*********
+
+
+example: 
+
+  // Named Volume
+  docker container run -d --name mysql -e MY_SQL_ALLOW_EMPTY=True -v mysql-db:/var/lib/mysql mysql
+
+  // Find volume
+  docker volume inspect mysql-db 
