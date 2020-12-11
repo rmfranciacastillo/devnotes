@@ -1,0 +1,21 @@
+Notes: Ubuntu
+===============
+
+BASH commands
+-------------
+
+date        -> Shows date (duh)
+hwclock     -> Shows Hardware clock. # hwclock --show
+convert     -> Convert images from .jpeg to jpg or others.
+
+
+example: 
+*********
+  convert image.png image.jpg
+ 
+
+uname       -> Get information about the kernel 
+  -v        -> See day when kernel was compiled 
+  -r        -> Version of the Kernel 
+
+ 
