@@ -1,0 +1,20 @@
+Notes: Vim
+============
+
+" For adding plugins, this is necessary
+" example
+set runtimepath+=/home/renato/.vim/bundle/neobundle.vim/
+
+
+*** NOTE: :help user-manual to read the docs to optimize the use of vim
+
+Commands:
+**********
+
+# Shows all the working plugins 
+:echo join(split(&runtimepath, ','), "\n") 	
+
+# Temporary install a plugin for a certain task
+:packadd vim-scriptease
+
+
