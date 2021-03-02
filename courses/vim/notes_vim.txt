@@ -11,10 +11,128 @@ set runtimepath+=/home/renato/.vim/bundle/neobundle.vim/
 Commands:
 **********
 
-# Shows all the working plugins 
-:echo join(split(&runtimepath, ','), "\n") 	
+# Shows all the working plugins
+:echo join(split(&runtimepath, ','), "\n")
 
 # Temporary install a plugin for a certain task
 :packadd vim-scriptease
+
+# Stops vim from messing with pasted
+:set paste!  		# Toggle between paste and nopaste mode
+
+
+
+Files:
+--------
+
+command
+*********
+:read <file>    # Appends the file input inside the called file
+
+# Buffer modifications
+:bn             # Go to next buffer file( ex: vim file1.txt file2.txt)
+:ls             # list all files available
+:bf             # First file buffer
+:bl             # Last file buffer
+:2,4wq          # Save only the changes between line 2 and 4
+
+# Creating me files
+:new            # New file in new window
+:enew           # New file in current window
+:vnew           # New file / Vertical Split
+:tnew           # New file in new tab
+
+# Creating new files from a template
+# Set this up in your .vimrc
+autocmd BufNewFile *.html 0r ~/vim_templates/html_template.html   # Awesome!
+
+
+Vim Commands:
+---------------
+%               # Can check matched {}, [], ()
+~               # Changes case of character
+.               # Repeats the last conversion
+gu              # Converts selection to uppercase
+
+
+i		# inside
+a 		# around
+w		# Word
+s		# Sentence
+p		# select paragraph
+t		# tag
+'/"/`		# quote
+[/{/(		# block
+
+example: 
+	dip		# Delete everything inside paragraph
+	vip		# Select paragraph
+
+################################################################################
+
+Movement:
+**********
+<C-u>           # move half a page up
+<C-d>           # move half a page down
+<C-b>           # move a page up
+<C-u>           # move a page down
+H               # top of viewport
+M               # middle of viewport
+L               # bottom of viewport
+
+
+################################################################################
+
+Registers
+-----------
+
+commands
+*********
+:reg 		# list of available registers 
+
+
+
+################################################################################
+
+Folding
+-------
+
+Example:
+
+" stuff {{{
+some codez
+" }}}
+
+Setting folding
+	set foldmethod=manual
+	VGzf			# fold everything selected
+
+manual 		# fold created manually using keybindings
+indent 		# Fold defined by indenting
+expr		# folds defined by a pattern via VimL
+syntax 		# fold creating by syntax rules of specific languages
+diff		# fold the unchanged stuff
+
+
+# Fold by indentation
+set foldmethod=indent
+set foldlevel=5
+
+# Fold based on syntax. (Vim covers some of the languages)  
+:set foldmethod=syntax
+
+# Folds the unchanged 
+:setlocal diff foldmethod=diff scrollbind nowrap foldlevel=1
+
+commands: 
+**********
+zf		# fold
+zc		# close the fold
+zo		# open the fold
+za		# alternate the fold
+zM		# closes all folds
+zR 		# opens all folds
+ 
+
 
 

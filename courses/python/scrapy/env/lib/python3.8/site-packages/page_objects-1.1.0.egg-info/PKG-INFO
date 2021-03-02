@@ -1,0 +1,100 @@
+Metadata-Version: 1.1
+Name: page-objects
+Version: 1.1.0
+Summary: Page Objects for Python
+Home-page: http://github.com/eeaston/page-objects
+Author: Edward Easton
+Author-email: eeaston@gmail.com
+License: MIT
+Description: Page Objects for Python
+        =======================
+        
+        Page Objects are a testing pattern for websites. Page Objects model a page on
+        your site to provide accessors and methods for interacting with this page,
+        both to reduce boilerplate and provide a single place for element locators.
+        
+        This project is an implementation of this pattern for Python using Selenium
+        webdriver. It is agnostic to test harnesses and designed to help you build up
+        libraries of code to test your sites.
+        
+        
+        .. image:: https://travis-ci.org/eeaston/page-objects.svg?branch=master
+            :target: https://travis-ci.org/eeaston/page-objects
+        
+        
+        Documentation
+        -------------
+        
+        https://page-objects.readthedocs.org
+        
+        
+        Quick Example
+        -------------
+        
+            >>> from page_objects import PageObject, PageElement
+            >>> from selenium import webdriver
+            >>>
+            >>> class LoginPage(PageObject):
+                    username = PageElement(id_='username')
+                    password = PageElement(name='password')
+                    login = PageElement(css='input[type="submit"]')
+            >>>
+            >>> driver = webdriver.PhantomJS()
+            >>> driver.root_uri = "http://example.com"
+            >>> page = LoginPage(driver)
+            >>> page.get("/login")
+            >>> page.username = 'secret'
+            >>> page.password = 'squirrel'
+            >>> assert page.username.text == 'secret'
+            >>> page.login.click()
+        
+        
+        Installation
+        ------------
+        
+            $ pip install page_objects
+        
+        
+        Project History
+        ---------------
+        
+        This was originally part of the pkglib project at http://github.com/ahlmss/pkglib,
+        it has been forked to retain history.
+        
+        
+        .. :changelog:
+        
+        Release History
+        ---------------
+        
+        1.1.0 (2014-10-15)
+        ++++++++++++++++++
+        
+        - Added feature: PageElements can now be contructed with context
+        - Deprecated page_element and mutli_page_element factory methods
+        
+        
+        1.0.1 (2014-09-30)
+        ++++++++++++++++++
+        
+        - Added PageObject.get(uri) method, based off of the page's root_uri attribute.
+        
+        
+        1.0.0 (2014-09-29)
+        ++++++++++++++++++
+        
+        - Initial export from http://github.com/ahlmss/pkglib
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Internet :: WWW/HTTP :: Browsers
+Classifier: Topic :: Software Development :: Testing

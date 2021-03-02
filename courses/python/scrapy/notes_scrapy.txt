@@ -1,25 +1,25 @@
 Notes: Scrapy
 ==============
 
-Most of the notes are in the code but here are some pointers. 
+Most of the notes are in the code but here are some pointers.
 
-** It is recommended to install scrapy in virtual environment. 
+** It is recommended to install scrapy in virtual environment.
 
 python3 -m venv env
-source env/bin/activate 
+source env/bin/activate
 pip install scrapy
 
 
 Entering the shell for scrapy.
 
-Commands: 
+Commands:
 ----------
 scrapy
 
   ** Global **
   startproject <projectName>    # Starts the project scaffold
   genspider <spider> <url>      # generates a new spider
-  
+
 
   ** project only **
   crawl <spiderName>            # Crawls the website with the spider name
@@ -28,39 +28,39 @@ scrapy
   bench                         # Runs a benchmarking test
 
 
-Example: 
-  
+Example:
+
   # Get the title from quotes
   scrapy shell 'http://quotes.toscrape.com/page/1/'
 
   >> fetch('www.example.com') # Fetch the urls
-  
-  # Add the '::text' to get the text inside the title 
+
+  # Add the '::text' to get the text inside the title
   response.css('title::text').getall()
   response.css('title::text').get()
 
   # You can also use re() to use regular expressions
   response.css('title::text').re(r'Quotes.*')
 
-  # Scrapy also use xPath (CSS seems easier but ok....) 
+  # Scrapy also use xPath (CSS seems easier but ok....)
   response.xpath('//title').get()
 
   # Creating a Dictionary from scraper
   post = response.css('div.post-item')[0]
   title = post.css('.post-header h2 a::text')[0].get()
-  date = post.css('.post-header a::text')[1].get() 
-  author = post.css('.post-header a::text')[2].get() 
+  date = post.css('.post-header a::text')[1].get()
+  author = post.css('.post-header a::text')[2].get()
 
   for post in response.css('div.post-item'):
     title = post.css('.post-header h2 a::text')[0].get()
-    date = post.css('.post-header a::text')[1].get() 
-    author = post.css('.post-header a::text')[2].get() 
+    date = post.css('.post-header a::text')[1].get()
+    author = post.css('.post-header a::text')[2].get()
     print(dict(title=title, date=date, author=author))
 
 
 Command line Tool
 ------------------
-Can have multiple settings inside the project. 
+Can have multiple settings inside the project.
 
 commands:
 **********
@@ -70,13 +70,13 @@ commands:
   project1 = myproject1.settings
   project2 = myproject2.settings
 
-    
+
   # Generating Spider from templates
   genspider [-t template] <spider> <url>      # generates a new spider
   scrapy genspider -l                         # Shows the available templates
 
 
- 
+
 Spider:
 --------
 
@@ -104,16 +104,16 @@ rules                         # List of 1 or more rules that determines a certai
 
   # ex: Class Rule
   class scrapy.spiders.Rule(
-      link_extractor=None, 
-      callback=None, 
-      cb_kwargs=None, 
-      follow=None, 
-      process_links=None, 
-      process_request=None, 
+      link_extractor=None,
+      callback=None,
+      cb_kwargs=None,
+      follow=None,
+      process_links=None,
+      process_request=None,
       errback=None
   )
 
-  # example definition: 
+  # example definition:
     rules = (
       # Extract links matching 'category.php' (but not matching 'subsection.php')
       # and follow links from them (since no callback means follow=True by default).
@@ -140,7 +140,7 @@ True
 # can save the response in a Selector Object
 from scrapy import Selector
 
-  # .. inside parse 
+  # .. inside parse
   sel = Selector(response)
   sel.xpath('xpath').get()
 
@@ -148,4 +148,55 @@ from scrapy import Selector
 Items:
 ------
 A great way to organize the data you are scraping
+
+ex:
+  # Declaring the Item
+  import scrapy
+
+  class Product(scrapy.Item):
+      name = scrapy.Field()
+      price = scrapy.Field()
+      stock = scrapy.Field()
+      tags = scrapy.Field()
+      last_updated = scrapy.Field(serializer=str)
+
+  # Declaring values for Product
+  product = Product(name='Desktop PC', price=1000)
+
+  # Retrieving data
+  >>> product['name']
+  Desktop PC
+  >>> product.get('name')
+  Desktop PC
+
+  # Accessing populated values
+  >>> product.keys()
+  ['price', 'name']
+  >>> product.items()
+  [('price', 1000), ('name', 'Desktop PC')]
+
+  # Dictionary
+  >>> dict(product) # create a dict from all populated values
+  {'price': 1000, 'name': 'Desktop PC'}
+
+
+Item Loaders:
+***************
+
+Item loaders are an easier way to populate the items
+
+  ex:
+  from scrapy.loader import ItemLoader
+  from myproject.items import Product
+
+  def parse(self, response):
+      l = ItemLoader(item=Product(), response=response)
+      l.add_xpath('name', '//div[@class="product_name"]')
+      l.add_xpath('name', '//div[@class="product_title"]')
+      l.add_xpath('price', '//p[@id="price"]')
+      l.add_css('stock', 'p#stock]')
+      l.add_value('last_updated', 'today') # you can also use literal values
+      return l.load_item()
+
+
 
