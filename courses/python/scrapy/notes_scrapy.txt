@@ -9,7 +9,6 @@ python3 -m venv env
 source env/bin/activate
 pip install scrapy
 
-
 Entering the shell for scrapy.
 
 Commands:
@@ -30,6 +29,7 @@ scrapy
 
 Example:
 
+	# SHELL
   # Get the title from quotes
   scrapy shell 'http://quotes.toscrape.com/page/1/'
 
@@ -75,6 +75,12 @@ commands:
   genspider [-t template] <spider> <url>      # generates a new spider
   scrapy genspider -l                         # Shows the available templates
 
+
+XPath:
+*******
+
+Great resource for XPath querying
+https://devhints.io/xpath
 
 
 Spider:
