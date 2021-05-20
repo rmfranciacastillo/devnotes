@@ -1,6 +1,5 @@
 import scrapy
 
-
 class AuthorSpider(scrapy.Spider):
     name = 'author'
 
