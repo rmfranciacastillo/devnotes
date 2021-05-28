@@ -16,8 +16,8 @@ Docker container <command>
 
 logs    Shows the logs of container
 top     Shows all the processes running on the container
-inspect Details of how the container started 
-stats   Performance stats on all containers 
+inspect Details of how the container started
+stats   Performance stats on all containers
 ls -a   Shows all containers
 rm      Removes one or more containers
 
@@ -25,14 +25,14 @@ run -it   Start new container interactively
 exec -it  Run additional command in existing container
 
 
-example: 
-  
+example:
+
   docker container run --publish 80:80 --detach nginx  // Runs docker for nginx
   docker container run -p 80:80 -d nginx      // Detach nginx
 
   // Some containers(mysql) accept --env(-e) variables (MYSQL_RANDOM_ROOT=yes)
-  // ex: docker container run -d -p 3306:3306 --name db -e MYSQL_RANDOM_ROOT=yes mysql 
- 
+  // ex: docker container run -d -p 3306:3306 --name db -e MYSQL_RANDOM_ROOT=yes mysql
+
   docker container run -it --name proxy nginx bash  // Runs container with interactive bash
   docker container start -ai ubuntu     // Rerun container with interactive bash
   docker container exec -it mysql bash  // Runs bash on mysql container
@@ -49,20 +49,20 @@ Commands:
 ls          Shows all Networks
 inspect     Inspect Network Configurations
 create      Uses --driver to create new virtual network
-connect     Attach network to container  
+connect     Attach network to container
 disconnect  Detach network to container
 
 
 // A container CAN be part of two separate networks
-// Docker has it's own DNS network making it easy for containers to find each 
+// Docker has it's own DNS network making it easy for containers to find each
 // other.
 
 example:
 
   docker network create my_app_net    // Creates a network
 
-  // Create and attach container to Network 
-  docker container run -d --name webhost --network my_app_net nginx 
+  // Create and attach container to Network
+  docker container run -d --name webhost --network my_app_net nginx
 
 
 Image:
@@ -75,30 +75,32 @@ Commands:
 history       Shows layers of changes made in an image
 inspect       returns JSON metadata about the image
 
-tag <container> <tag>     renames existing container with custom tag 
+tag <container> <tag>     renames existing container with custom tag
 
 
 Dockerfile:
------------ 
+-----------
 
 Uses file to create images with a series of instructions.
 
 ex:
   FROM ubuntu:lastest
-  COPY . . 
+  COPY . .
   RUN npm install
   CMD ["npm", "start"]
 
-// To ignore certain files use .dockerignore. Makes it faster to install  
+// To ignore certain files use .dockerignore. Makes it faster to install
 
-commands: 
+commands:
 *********
 
 example:
 
   docker image build -t <image_name> .        // Creates an image from the Dockerfile
-  docker container run --rm -p 3000:3000 testnode     // Run the container temporarily
-  docker tag testnode rmfranciacastillo/testing-node  // Tag the image for 
+
+	// Need to add -it to make it possible to escape with CTRL+C
+  docker container run -it --rm -p 3000:3000 testnode     // Run the container temporarily
+  docker tag testnode rmfranciacastillo/testing-node  // Tag the image for
   docker push rmfranciacastillo/testing-node          // Push image to Docker
 
 
@@ -109,10 +111,10 @@ Commands:
 *********
 
 
-example: 
+example:
 
   // Named Volume
   docker container run -d --name mysql -e MY_SQL_ALLOW_EMPTY=True -v mysql-db:/var/lib/mysql mysql
 
   // Find volume
-  docker volume inspect mysql-db 
+  docker volume inspect mysql-db
