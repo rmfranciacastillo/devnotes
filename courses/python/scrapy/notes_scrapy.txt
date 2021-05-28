@@ -206,3 +206,8 @@ Item loaders are an easier way to populate the items
 
 
 
+
+// TODO
+I) Project to scrape all the images
+II) Use Rules() and Link
+
