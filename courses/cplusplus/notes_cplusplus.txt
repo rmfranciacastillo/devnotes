@@ -1,6 +1,63 @@
 Notes: C++
 ============
 
+Command line interface:
+------------------------
+
+g++ -Wall -std=c++14 main.cpp -o main 
+
+  -Wall         // Show all errors
+  -std=c++14    // Use cpp 14 standard
+
+
+Makefile
+*********
+
+makefile:
+
+all:
+  clang++ -std=c++11 -Wall -Wextra -Wpendantic -Werror Account.cpp Transaction.cpp 
+  SimpleClasses.cpp -o Simple
+
+
+// For multiple files
+// file: changesonly
+// make -f changesonly
+all: Simple
+
+Simple: Account.o Transaction.o SimpleClasses.o
+	clang++ Account.o Transaction.o SimpleClasses.o -o Simple
+
+Account.o: Account.cpp Account.h Transaction.h
+	clang++ -c -std=c++11 -Wall -Wextra -Wpedantic -Werror Account.cpp 
+
+Transaction.o: Transaction.cpp Transaction.h
+	clang++ -c -std=c++11 -Wall -Wextra -Wpedantic -Werror Transaction.cpp
+
+SimpleClasses.o: SimpleClasses.cpp Account.h
+	clang++ -c -std=c++11 -Wall -Wextra -Wpedantic -Werror SimpleClasses.cpp 
+
+
+Add Ctags
+-----------
+ctags -R .
+
+Compiling many files
+--------------------
+// Remember to add clang++ and not clang
+// freaking sweet
+
+clang++ Functions.cpp Functions.h Small.cpp
+
+
+Debugging C++ with GDB
+------------------------
+Command line for Debugging: 
+
+  -Wall -Wextra -Wpendantic -Werror  // Warning tools  
+
+
+
 2's complement:
 ---------------
 
@@ -56,6 +113,46 @@ Can also include an array library
 //			 Also, functions cannot return an Array
 
 	void initialize(const int list[], int listSize) { ... }
+
+
+Vector:
+----------
+
+ex:
+#include <vector>
+using std::vector;
+
+
+vector<char> vowels; 
+vector<int> test_scores;
+
+test_scores.push_back(3); 
+
+// Vector check
+for (auto item: nums) {
+  cout << item << " ";
+}
+
+// for loop (3 part)
+for( unsigned int = 0; i < nums.size(); i++) {
+  std::cout << nums[i] << std::endl;
+}
+
+// For loop (collections)
+for(auto i = begin(nums); i != end(nums); i++) {
+  std::cout << *i << std::endl;  // Using itirator "*i"
+}
+
+
+
+Algorithm:
+-----------
+
+#include <algorithm>
+
+vector<string> words;
+// ..
+sort(begin(words), end(words));
 
 
 
@@ -121,12 +218,91 @@ Enum Types
 OOP concepts
 --------------
 
-contructor
-**********
+Class:
+--------
+class  { ... };
+
+private: 
+public: 
+
+
+Example:
+
+Account  *frank_account = new Account();
+
+// Same thing 
+(*frank_account).balance;
+frank_account->balance;
+
+
+Header files:
+*************
+
+Include guards are added to not let the package be defined more than once. 
+
+#ifndef _ACCOUNT_H_
+#define _ACCOUNT_H_
+
+...
+
+#endif
+
+
+// Or you could use the Pragma once directive
+// Just make sure the compiler supports this
+#pragma once
+
+
+Account::set_name() { ... }  // Uses the scope resolution operator
+
+
+contructors/ destructors
+**************************
 a) No return type
 b) Same name as the class
 c) Should be public
 
+
+Ex:
+
+class Player {
+
+  private:
+    ...
+  
+  public:
+    // Overloaded constructors
+    Player();
+    // Or use
+    // Player()=default; 
+    Player(std::string name);
+    Player(std::string name, int health, int xp);
+
+    // Destructor
+    ~Player();
+};
+
+// .cpp file
+Player::Player() 
+  : name {"None"},  health {0}, xp {0} {}
+
+
+
+
+Player *enemy = new Player("Enemy", 1000, 0);
+delete enemy; 
+
+
+// With default allows declaration without parameters
+Player p1; 
+
+Copy ctor:
+***********
+
+
+
+OOP Concepts
+-------------
 I) Encapsulation
 
 	- Avoid others to manipulate the data
@@ -157,6 +333,7 @@ III) Inheritance
 		Teacher(int age): Employee(int age) { ... }
 	}
 
+
 IV) Polymorphism
 
 	class Employee {
@@ -171,9 +348,8 @@ IV) Polymorphism
 	Employee* e1 = &d;
 	Employee* e2 = &t;
 
-	e1->Work();
+	e1->Work();  // Same as (*e1).Work();
 	e2->Work();
-
 
 
 

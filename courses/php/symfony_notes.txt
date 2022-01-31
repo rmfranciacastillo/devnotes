@@ -1,0 +1,24 @@
+Notes: Symfony 
+================
+
+// Symfony scripts
+php bin/console
+
+// Symfony scaffolding
+composer create-project symfony/skeleton:"^4.3" sfcourse
+composer create-project symfony/website-skeleton sfcourse
+
+
+Symfony CLI command
+-----------------------
+
+// Standard CLI console
+php bin/console
+
+// Required for generating CLI components
+composer require make
+
+
+
+
+

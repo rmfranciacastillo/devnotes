@@ -1,0 +1,55 @@
+Notes: Jupyter 
+==================
+
+Installation:
+--------------
+
+pip install notebook
+jupyter-lab
+
+
+Must-have packages for Finance and Data Science
+------------------------------------------------
+
+1) NumPy
+
+  3rd party allowing us to work with multidimentional arrays
+
+
+2) Pandas
+
+  Organize data in tabular form and attach labels to rows and columns
+
+
+3) Matplotlib 
+
+  2D plotting library designed for visualization of NumPy Computations.
+
+
+4) Math
+
+5) random
+
+6) statsmodels
+
+  Descriptive statistics, plotting functions, regressions
+
+7) pandas_datareader
+
+  - pip3 install pandas-datareader
+
+
+NumPy:
+------
+
+import numpy as np
+
+a = np.array([0,1,2,3], [4,5,6,7])
+
+
+
+
+
+
+
+

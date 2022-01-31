@@ -3,6 +3,15 @@ NOTES: python3
 
 # To get some cool docs use help(<item>) in IDLE to get some good man pages
 
+Creating Virtual Environments
+------------------------------
+
+pip install virtualenv
+virtualenv venv
+source venv/bin/activate
+deactivate
+
+
 Loops:
 ------
 
