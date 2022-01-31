@@ -1,0 +1,361 @@
+Notes: C++
+============
+
+Command line interface:
+------------------------
+
+g++ -Wall -std=c++14 main.cpp -o main 
+
+  -Wall         // Show all errors
+  -std=c++14    // Use cpp 14 standard
+
+
+Makefile
+*********
+
+makefile:
+
+all:
+  clang++ -std=c++11 -Wall -Wextra -Wpendantic -Werror Account.cpp Transaction.cpp 
+  SimpleClasses.cpp -o Simple
+
+
+// For multiple files
+// file: changesonly
+// make -f changesonly
+all: Simple
+
+Simple: Account.o Transaction.o SimpleClasses.o
+	clang++ Account.o Transaction.o SimpleClasses.o -o Simple
+
+Account.o: Account.cpp Account.h Transaction.h
+	clang++ -c -std=c++11 -Wall -Wextra -Wpedantic -Werror Account.cpp 
+
+Transaction.o: Transaction.cpp Transaction.h
+	clang++ -c -std=c++11 -Wall -Wextra -Wpedantic -Werror Transaction.cpp
+
+SimpleClasses.o: SimpleClasses.cpp Account.h
+	clang++ -c -std=c++11 -Wall -Wextra -Wpedantic -Werror SimpleClasses.cpp 
+
+
+Add Ctags
+-----------
+ctags -R .
+
+Compiling many files
+--------------------
+// Remember to add clang++ and not clang
+// freaking sweet
+
+clang++ Functions.cpp Functions.h Small.cpp
+
+
+Debugging C++ with GDB
+------------------------
+Command line for Debugging: 
+
+  -Wall -Wextra -Wpendantic -Werror  // Warning tools  
+
+
+
+2's complement:
+---------------
+
+Adding numbers uses 2's complement it's a great way to add numbers without
+
+overflowing.
+
+for example:
+
+1 - 3 = -2
+
+// in 2's complement(1-> Invert all, 2-> Add one) 00000011 -> 11111100 -> 11111101
+---------
+
+00000001
+11111101
+---------
+11111110  // 2's complement of -2
+Note: With 2's complement you can throw away the sign bit and won't have two zeroes.
+
+  (10000000 and 00000000) <- This would be a nightmare
+
+Enum:
+------
+
+Datatypes with a limited set of data
+
+  enum class Day {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday};
+  Day today {Day::Tuesday};
+
+
+Arrays:
+--------
+
+You can use the old declaration
+
+  int x[10];
+
+  or
+
+  int[10] x {}; // Fills an empty array
+
+Can also include an array library
+
+  #include <array>
+
+  std::array<datatype, Number> stuff {};
+
+  stuff.fill(3.1416);                   // Fills array with PI values.
+
+
+// Note: Arrays as parameters are passed by reference
+//			 Also, functions cannot return an Array
+
+	void initialize(const int list[], int listSize) { ... }
+
+
+Vector:
+----------
+
+ex:
+#include <vector>
+using std::vector;
+
+
+vector<char> vowels; 
+vector<int> test_scores;
+
+test_scores.push_back(3); 
+
+// Vector check
+for (auto item: nums) {
+  cout << item << " ";
+}
+
+// for loop (3 part)
+for( unsigned int = 0; i < nums.size(); i++) {
+  std::cout << nums[i] << std::endl;
+}
+
+// For loop (collections)
+for(auto i = begin(nums); i != end(nums); i++) {
+  std::cout << *i << std::endl;  // Using itirator "*i"
+}
+
+
+
+Algorithm:
+-----------
+
+#include <algorithm>
+
+vector<string> words;
+// ..
+sort(begin(words), end(words));
+
+
+
+File Input/Output
+------------------
+
+5 steps requirement:
+********************
+
+a) Include header: <fstream>
+b) Define fstream variables
+c) Associate fstream variables with the I/O sources. (fin.open('sth.txt'))
+d) Use the filestream variable with >>, <<
+e) Close the files
+
+
+// Check if file exist
+ifstream fin;
+
+fin.open('data.txt');
+
+if(!fin) {
+	cout << "File does not exists"
+	return 1;
+}
+
+
+Enum Types
+-----------
+
+	C++ custom datatypes with custom values.
+
+	enum typenName {value1, value2, ....}
+
+  ex: enum colors {BROWN, BLUE, RED, GREEN, YELLOW};
+
+	ex2:
+		enum mathStudent {JOHN, BILL, CINDY, LISA, RON};
+		enum compStudent {SUSAN, CATHY, JOHN, WILLIAM}; // illegal bc JOHN was used in one enum
+
+
+	ex3: Looping
+
+		enum sports {BASKETBALL, FOOTBALL, HOCKEY, BASEBALL, SOCCER, VOLLEYBALL};
+
+		for (mySport = BASKETBALL; mySport <= SOCCER; mySport = static_cast<sports>(mySport + 1)) { ... }
+
+	ex4: Switch cases
+
+		enum courses { ALGEBRA, CS, LITERATURE }
+
+		switch(course) {
+			case ALGEBRA: ...;
+			case CS: ...;
+			case LITERATURE: ...;
+		}
+
+	ex5: Variable declaration
+
+	enum coins {PENNY, NICKEL, DIME, HALFDOLLAR, DOLLAR} change, usCoins;
+
+
+OOP concepts
+--------------
+
+Class:
+--------
+class  { ... };
+
+private: 
+public: 
+
+
+Example:
+
+Account  *frank_account = new Account();
+
+// Same thing 
+(*frank_account).balance;
+frank_account->balance;
+
+
+Header files:
+*************
+
+Include guards are added to not let the package be defined more than once. 
+
+#ifndef _ACCOUNT_H_
+#define _ACCOUNT_H_
+
+...
+
+#endif
+
+
+// Or you could use the Pragma once directive
+// Just make sure the compiler supports this
+#pragma once
+
+
+Account::set_name() { ... }  // Uses the scope resolution operator
+
+
+contructors/ destructors
+**************************
+a) No return type
+b) Same name as the class
+c) Should be public
+
+
+Ex:
+
+class Player {
+
+  private:
+    ...
+  
+  public:
+    // Overloaded constructors
+    Player();
+    // Or use
+    // Player()=default; 
+    Player(std::string name);
+    Player(std::string name, int health, int xp);
+
+    // Destructor
+    ~Player();
+};
+
+// .cpp file
+Player::Player() 
+  : name {"None"},  health {0}, xp {0} {}
+
+
+
+
+Player *enemy = new Player("Enemy", 1000, 0);
+delete enemy; 
+
+
+// With default allows declaration without parameters
+Player p1; 
+
+Copy ctor:
+***********
+
+
+
+OOP Concepts
+-------------
+I) Encapsulation
+
+	- Avoid others to manipulate the data
+	- Using getters and setters
+
+II) Abstraction
+
+	- Abstract classes
+
+	ex:
+	class AbstractEmployee {
+		virtual void askForPromotion()=0; 	// Must use this virtual function
+	}
+
+	class Employee: AbstractEmployee {
+		private: ...
+		public:
+				...
+				void askForPromotion() { ... }
+	}
+
+
+III) Inheritance
+
+	class Developer: Employee { ... }
+
+	class Teacher: Employee {
+		Teacher(int age): Employee(int age) { ... }
+	}
+
+
+IV) Polymorphism
+
+	class Employee {
+		...
+		virtual void Work() { ... }
+		...
+	}
+
+	Developer d = Developer("...");
+	Teacher t = Teacher(...)
+
+	Employee* e1 = &d;
+	Employee* e2 = &t;
+
+	e1->Work();  // Same as (*e1).Work();
+	e2->Work();
+
+
+
+
+
+
+
+
+

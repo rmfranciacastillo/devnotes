@@ -1,0 +1,316 @@
+Notes: Angular
+===============
+
+Databinding:
+------------
+
+// Output data
+String Interpolation        `{{data}}`
+Property Binding            `[property]="data"`
+
+// React to user's event
+Event Binding               `(event)="expression"`
+
+// Two-way binding
+[(ngModel)]="data"          // Not recommended
+
+
+Directives
+-----------
+Directives are instructions in the DOM
+
+example:
+  
+  <p appTurnGreen>This will turn green</p>
+
+  // Directive decorator
+  @Directive({
+    selector: 'appTurnGreen'
+  })
+
+  export class TurnGreenDirective {
+
+  }
+
+
+Attribute
+**********
+Look like normal HTML Attribute
+Only affect/Change the element they are added to
+
+
+// Note: it is much better to use the renderer function to create the directives.
+//      This is why is it so cool to use functions instead of accessing the 
+//      element references directly. 
+ex:
+
+import { Directive, OnInit, Renderer2, ElementRef } from '@angular/core'; 
+
+@Directive({
+  selector: '[appBetterHighlight]'
+})
+
+export class BetterHighlightDirective implements OnInit {
+  // Because this is typescript class it needs a constructor
+  constructor(private render: Renderer2, private elRef: ElementRef) {}
+
+  ngOnInit() {
+    // Call renderer to change the style of a simple template 
+    // This needs the value of three things to work. 
+    // The element, the property and the value of the element 
+    this.renderer.setStyle(this.elRef, 'background-color', 'blue');
+  }
+}
+
+
+@HostListener
+**************
+You can use HostListener to react to a certain action. For example, a hover 
+
+interaction. 
+
+ ex:
+  @HostListener('mouseover') mouseover(eventData: Event) {
+    // renderer: Renderer2
+    this.renderer.setStyle(this.elRef.nativeElement, 'background', 'blue');
+  }
+
+@HostBinding
+*************
+Same concept as @Hostlistener but you bind a value instead of calling the renderer
+
+ex:
+  @HostBinding('style.backgroundColor') backgroundColor: string;
+
+  // In functions
+  this.backgroundColor = 'transparent'; 
+
+Note: you can add @Input and have custom directives with input values and change 
+
+    default values of the item.
+
+
+Structural
+***********
+Look like a HTML attribute starting with a *
+Affect a whole are in the DOM 
+
+
+
+default directives:
+******************
+
+- ngIf
+ 
+  // The * must be added because this is a structural directive 
+  <p *ngIf="condition">Show if conditional is true</p>
+  
+  // Without the star
+  <ng-template [ngIf]="condition">
+    <p>Show if conditional is true</p>
+  </ng-template> 
+
+- Else template
+  
+  // You have to add a local reference "#"
+  <p *ngIf="statement; else noServer">Show if conditional is true</p>
+  <ng-template #noServer>
+    <p>No server was created!</p>
+  </ng-template>
+
+
+- ngStyle
+
+  // With CSS 
+  <p [ngStyle]="{ 'background-color': 'red' }">message</p> 
+
+  // With camel case 
+  <p [ngStyle]="{ backgroundColor: 'red' }">message</p>  
+  
+- ngClass
+  
+  <p [ngClass]="{ online: serveStatus == 'online' }">message</p>  
+
+- ngFor
+
+  <ol>
+    <li *ngFor="let item of items; let i = index">
+      <h2>{{ item.title }}</h2>
+    </li>
+  </ol>
+
+
+Encapsulation:
+---------------
+
+Local references:
+*****************
+
+Create cool local references inside templates and use them inside the template
+
+ex:
+  // Template
+  // Using serverNameInput as a local reference
+  <input type="text" #serverNameInput >
+  <button (click)="addServer(serverNameInput)">Add Server</button>
+
+  // Typescript
+  addServer(nameInput: HTMLInputElement) {
+    console.log(nameInput.value);
+  }
+
+
+ViewChild:
+***********
+
+Uses a local reference to get an ElementRef. 
+
+ex:
+   <!-- Defining local reference audioOption --> 
+   <audio #audioOption>
+       <source src='../*.mp3' type="audio/mp3">
+   </audio>
+
+  // Typescript
+  @ViewChild('audioOption') audioPlayerRef: ElementRef;
+
+  onAudioPlay(){
+    this.audioPlayerRef.nativeElement.play();
+  }
+
+
+Note: You can add stuff between component tags by adding <ng-content></ng-content>
+
+
+Lifecycle hooks
+***************
+ngOnChanges              Called after a bound input property changes
+ngOnInit                 Called once the component is initialized
+ngDoCheck                Called during every change detection run
+ngAfterContentInit       Called after content (ng-content) has been projected into view
+ngAfterContentChecked    Called every time the projected content has been checked
+ngAfterViewInit          Called after the component’s view (and child views) has been initialized
+ngAfterViewChecked       Called every time the view (and child views) have been checked
+ngOnDestroy              Called once the component is about to be destroyed
+
+
+// Note: Some of this lifecycle hooks have parameters that can help you track the 
+//        changes. For example, ngOnChange(changes: SimpleChanges)  
+//        SimpleChanges is imported from @angular/core
+
+
+Services 
+---------
+
+// Sample service
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+class SampleService {
+  constructor() {}
+}
+
+
+Routing:
+---------
+
+// Three things to add simple navigation Routing
+//  1) Routes array 
+//  2) RouterModule 
+//  3) <router-outlet></router-outlet>
+
+
+// Example: app.module.ts
+...
+import { Routes, RouterModule } from '@angular/router';
+...
+...
+// Always add the '/'
+const appRoutes: Routes = [
+  { path: 'server',  component: ServerComponent },
+  { path: 'users',   component: UsersComponent}
+]
+...
+@NgModule({
+  declarations: [...],
+  imports: [
+    ...
+    RouterModule.forRoot(appRoutes)
+  ],
+  ...
+})
+
+// app.component.html
+<!-- Add this tag to make routing happen -->
+<router-outlet></router-outlet>
+
+
+// ****************************
+
+Another way to add this is to have a re-routing once a task is completed
+
+Navigating programmatically
+
+There are two steps needed to add navigation programatically
+
+// Example: app.component.ts
+
+...
+import { Router, ActivatedRoute } from '@angular/router';
+...
+export class AppComponent {
+  contructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  onNavigateToServers(){
+    // Do something
+    this.router.navigate(['/servers'], { relativeTo: this.route });
+  }
+}
+
+
+Lessons:
+--------
+
+This section of the documentation will be the lessons that I have written to 
+
+learn Angular or find better ways to understand this concepts. This document
+
+is NOT intended to be a final draft or a complete lesson. It's a way for me to
+ 
+understand the concepts. I suggest you write the same way.
+
+
+What is Angular?
+*****************
+The fancy version of Angular is that is a developer framework that will help 
+
+you create sophisticated and scalable applications. And that's partly true. 
+
+What Angular is, for my current understanding, is a LEGO box built on basic 
+
+pieces. Components being the most common. So what's the difference from other
+
+JS-based tools such as React and Vue. All of the tools you need are already included
+
+in Angular. That's what makes it cool and great for larger applications. 
+
+It's a LEGO box with everything you need. But it's also too big sometimes. 
+
+That's basically it. 
+
+
+Angular comes with a CLI(Command Line Interface) that will speed up your development
+
+process. ```ng <commands>``` is usually the format. Check the man pages for more 
+
+info. 
+
+
+
+
