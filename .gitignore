@@ -1,2 +1,13 @@
 node_modules/
 __pycache__/
+
+
+tags
+tags.lock
+tags.temp
+/**/tags
+/**/tags.lock
+/**/tags.temp
+
+/**/venv
+/**/vendor

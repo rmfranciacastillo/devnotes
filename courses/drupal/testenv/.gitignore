@@ -1,0 +1,54 @@
+# gitignore template for Drupal 8 projects
+#
+# earlier versions of Drupal are tracked in `community/PHP/`
+
+# Ignore configuration files that may contain sensitive information
+/sites/*/*settings*.php
+/sites/*/*services*.yml
+
+# Ignore paths that may contain user-generated content
+/sites/*/files
+/sites/*/public
+/sites/*/private
+/sites/*/files-public
+/sites/*/files-private
+
+# Ignore paths that may contain temporary files
+/sites/*/translations
+/sites/*/tmp
+/sites/*/cache
+
+# Ignore testing related files
+/sites/simpletest
+
+# vim scripts
+tags
+tags*
+
+# Drupal
+/vendor
+/vendor/*
+vendor
+
+/web/core/*
+/web/core
+/web/modules/contrib
+/web/modules/custom/zendesk-webform
+/web/themes/contrib
+/web/sites
+/web/autoload.php
+/web/autoload.php
+/web/index.php
+/web/README.md
+/web/update.php
+/web/composer.json  
+/web/example.gitignore  
+/web/INSTALL.txt  
+/web/vendor
+/web/profiles  
+/web/robots.txt  
+/web/web.config
+
+/.editorconfig
+/.gitattributes
+
