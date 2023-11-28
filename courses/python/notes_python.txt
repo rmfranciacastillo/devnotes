@@ -49,12 +49,52 @@ ex:
   a = [1,2,3,4]
   len(a)  # Length of the list
 
+
+# Sort 
+In [1]: numbers = [10, 3, 7, 1, 9, 4, 2, 8, 5, 6]
+In [2]: numbers.sort()
+In [3]: numbers
+Out[3]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+In [4]: numbers.sort(reverse=True)
+In [5]: numbers
+Out[5]: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+# Sequence slice
+
+In [1]: numbers = [2, 3, 5, 7, 11, 13, 17, 19]
+In [2]: numbers[2:6]
+Out[2]: [5, 7, 11, 13]
+
+In [3]: numbers[:6]
+Out[3]: [2, 3, 5, 7, 11, 13]
+
+# Slicing with Steps
+# The following code uses a step of 2 to create a slice with every other element of numbers:
+In [8]: numbers[::2]
+Out[8]: [2, 5, 11, 17]
+
+# Slicing with Negative Indices and Steps
+# You can use a negative step to select slices in reverse order. The following code concisely
+creates a new list in reverse order:
+In [9]: numbers[::-1]
+Out[9]: [19, 17, 13, 11, 7, 5, 3, 2]
+
+
+del Statement
+**************
+Used to remove elements from a list and to delete variables from the interactive session.
+
+
 tuple
 ******
 An ordered inmutable collection of objects
 
 ex:
-  (a,b,c,d)
+  example_tuple = (a,b,c,d)
+
+
 
 dictionary
 ***********
@@ -70,3 +110,55 @@ An unordered set of unique objects
 
 ex:
   set('abc')
+
+String
+=======
+
+F-strings (Formatted Strings):
+--------------------------------
+
+average = 12.4
+f'Class average is {average}'
+
+amount = 112.31
+print(f'{amount:.20f}') 
+# output: 112.31000000000000227374
+
+Loops:
+======
+
+Sentinel Loop
+---------------
+
+while grade != -1:
+total += grade
+grade_counter += 1
+grade = int(input('Enter grade, -1 to end: '))
+
+
+For Loops
+-------------
+
+for number in range(5, 10):
+  print(number, end=' ')
+
+# For loop with a step of 2
+for number in range(5, 10,2):
+  print(number, end=' ')
+
+
+Functions:
+==========
+
+# Define a function
+def function_name():
+  ....
+
+
+Random Numbers:
+---------------
+
+In [1]: import random
+In [2]: for roll in range(10):
+...:
+print(random.randrange(1, 7), end=' ')

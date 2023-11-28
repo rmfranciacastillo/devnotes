@@ -1,0 +1,7 @@
+forcontu_test.example:
+  path: '/forcontu-test/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\forcontu_test\Controller\ForcontuTestController::build'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,31 @@
+<?php
+/**
+* @file
+* Module file for Forcontu Hello
+* This module creates a static page with a welcome message.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+* Implements hook_help().
+*/
+function forcontu_hello_help($route_name, RouteMatchInterface $route_match) {
+
+  switch ($route_name) {
+    // Main module help for the Forcontu Hello module.
+    case 'help.page.forcontu_hello':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module shows how to create a simple page. ') .
+        '</p>';
+      return $output;
+
+    // Help for another path in the Forcontu Hello module.
+    case 'forcontu_hello.hello':
+      $output = '';
+      $output .= '<p>' . t('This is a very simple page created by the Forcontu
+      Hello module. ') . '</p>';
+      return $output;
+  }
+}
