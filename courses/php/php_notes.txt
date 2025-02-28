@@ -92,5 +92,8 @@ if($handle = fopen($file, 'r')) {
 // Delete a file
 unlink(name_of_the_file);
 
+PHP Functions
+--------------
 
+These is a list of functions that are common in PHP. Practice 
 

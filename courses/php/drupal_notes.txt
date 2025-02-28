@@ -1,0 +1,7 @@
+Notes: Symfony 
+================
+
+Theming: 
+--------
+# Generate starter theme kit
+php core/scripts/drupal generate-theme my_new_theme

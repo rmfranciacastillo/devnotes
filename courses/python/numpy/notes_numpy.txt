@@ -1,0 +1,5 @@
+NOTES: numpy
+================
+
+# To get some cool docs use help(<item>) in IDLE to get some good man pages
+
