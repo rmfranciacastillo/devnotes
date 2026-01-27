@@ -1,0 +1,68 @@
+VSCode Notes:
+===============
+
+Settings:
+---------
+font-ligatures: to replace == with another symbol
+wordwrap
+
+ctr + `  -> Opens terminals
+
+
+Extensions:
+-----------
+
+themes:
+*******
+Color theme -> VScode theme setups
+cobalt2
+
+practical:
+***********
+prettier -> format on save (Save in settings)
+advanced-new-file -> Create new files with shortcuts on folders
+Better Comments -> Styles Comments
+Quokka.ja -> Creates a JS playground
+polacode -> Generates images from code
+live-server -> Creates Live server to test
+autorename -> Renames HTML tags
+bracket Pair Colorizer -> Colorize the open and close bracket
+bookmarks -> bookmarks pieces of code
+cloak -> hide credentials
+CSS Peek -> allows peeking css file declaration
+DotEnv -> environment variables in env
+*Editor config for VSCode -> Allows .editorconfig to override settings
+import Cost -> Shows how big the imports are
+markdown PDF -> Convert markdown to PDF (Good for creating an ebook)
+Settings Sync -> Save your settings from VScode into github
+live-share -> Real time collaboration
+find it faster -> fzf search
+Debug Visualizer -> You can view graphical Data Structures.
+
+
+Laravel working:
+****************
+PHP all in one -> Intelliphense, composer, etc (Adds a bunch of code snippets)
+Laravel Blade Snippets
+Laravel Extra Intellisense
+Laravel Goto view
+Laravel Goto Components
+Prettier
+Auto Rename Tag
+Highlight Matching Tag
+Intellisense for CSS class names in HTML
+Tailwind Intellisense
+editorconfig for vscode
+
+Good but not recommended
+~~~~~~~~~~~~~~~~~~~~~~~~~
+PHP Artisan
+Laravel Snippets
+Laravel Blade Wrapper
+
+
+
+
+Others
+******
+Markdown -> You can open Markdown preview on core to see your Markdown preview

@@ -5,3 +5,18 @@ Theming:
 --------
 # Generate starter theme kit
 php core/scripts/drupal generate-theme my_new_theme
+
+VS Code: 
+---------
+Useful list of plugins for VScode:
+
+- Remote Explorer + Dev Containers
+- Php Sniffer & Beautifier
+- PHP Docblocker
+- Phpstan
+- Drupal Smart Snippets
+- Php Intelephense
+- Php Debug
+- PhpUnit Test Explorer
+
+** settings.local.php
