@@ -20,3 +20,19 @@ Useful list of plugins for VScode:
 - PhpUnit Test Explorer
 
 ** settings.local.php
+
+VSCode JSON: https://gist.github.com/ultimike/10fd51837b4e04a9809c39be0ffd969a
+
+Add To project:
+----------------
+phpcs.xml
+phpstan.neon
+phpunit.xml
+.vscode/launch.json (xDebug) 
+.vscode/settings.json
+
+
+// Test conding standards
+./vendor/bin/phpcs --standard=Drupal,DrupalPractice web/modules/custom/my_module/
+
+

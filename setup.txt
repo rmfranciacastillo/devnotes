@@ -1,0 +1,13 @@
+VSCode:
+=======
+
+JS
+----
+Ctrl  + , . Then click on open settings.json. Then add,
+
+"files.associations": {
+    "*.module": "php",
+    "*.js": "javascriptreact",
+}
+
+This will add autocomplete for HTML on tab and JSX.
