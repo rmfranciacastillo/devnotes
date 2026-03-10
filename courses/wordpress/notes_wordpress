@@ -33,3 +33,106 @@ WP_Query
 $homepagePosts = new WP_Query(array(
     'post_per_page' => 2
 ))
+
+
+
+
+Useful wp functions:
+=========================
+
+get_the_permalink()                              // Get the href of the post/page type
+the_permalink()
+the_author_posts_link()
+get_post_type_archive_link('event')              // Get the archive link 
+get_template_part()                              // Gets a template part
+
+wp_get_post_parent_id()     // Get the ID of the parent (return: 0 if no parent, id if parent)
+get_the_ID()                // wp_get_post_parent_id(get_the_ID()); 
+
+wp_list_pages()             // Lists all of the pages
+Call: 
+wp_list_pages([
+  'title_li' => false,
+  'child_of' => get_the_ID(),
+  'sort_column' => 'menu_order'
+]);
+
+Register Items
+-------------------
+register_nav_menu('HeaderMenuLocation', 'Header Menu Location')
+wp_nav_menu                 // Call Menu in Html
+
+wp_nav_menu([
+  'theme_location'  => 'headerMenuLocation',
+])
+
+// When registering a new POST type, then work with updating the permalinks
+register_post_type([...])   // Registers a new Post type
+
+register_rest_field()       //Registers new API
+
+
+site_url('/blog')           // Simple href option 
+get_the_category_list(',')
+
+// Query the post/page types.
+// Remember to reset the query once used
+WP_Query();
+wp_reset_post_data();
+echo paginate_links();
+get_search_query();         // Returns the value of searched Items
+
+
+Utils
+-------
+wp_trim_words(get_the_content(), 300);      // Trim the content 
+get_post_type()                             // Get the type of the post
+get_the_excerpt()                           // Get the excerpt of an item
+the_post_thumbnail()                        // Print featured image
+sanitize_text_field()                       // Sanitizes text to avoid SQL injection
+array_unique($array, SORT_REGULAR)          // Removes non-unique arrays
+array_values($array)                        // Show only values of the array
+esc_url(site_url('/'))                      // 
+
+Files:
+-------
+single.php
+archive.php
+page.php 
+header.php
+footer.php
+404.php 
+403.php
+
+WP API
+------
+
+Alter API hook
+function university_custom_rest() {
+  register_rest_field('post', 'customField' , [
+    'get_callback' => function() { ... }, 
+  ]);
+
+}
+
+add_action('rest_api_init', 'university_custom_rest');
+
+// URLs
+<localhost>/wp-json/wp/v2/pages   
+<localhost>/wp-json/wp/v2/posts
+
+<localhost>/wp-json/wp/v2/posts?per_page=1
+<localhost>/wp-json/wp/v2/posts/{id}                      // Specific post by ID
+<localhost>/wp-json/wp/v2/posts?search={text}             // Search by text 
+
+// Register new API field endpoint
+// "Hooks" in the API response.
+register_rest_field('post', 'authorName', array(
+  'get_callback' => function() { return get_the_author(); },
+))
+
+
+
+
+// Last left: 78  Section 16.
+
